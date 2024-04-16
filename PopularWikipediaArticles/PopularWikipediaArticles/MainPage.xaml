@@ -18,7 +18,7 @@
     <Border Stroke="#092748" Padding="{OnPlatform Default=10, Android=7,iOS=7}" StrokeShape="RoundRectangle 10" Margin="25" StrokeThickness="2">
 
         <chart:SfSunburstChart ItemsSource="{Binding Data}" ValueMemberPath="Value" PaletteBrushes="{Binding CustomBrush}" 
-                               EnableTooltip="True" ShowLabels="True" Radius="1" InnerRadius="0.37">
+                               EnableTooltip="True" ShowLabels="True" Radius="1" InnerRadius="{OnPlatform MacCatalyst=0.21, Default=0.37}">
 
             <chart:SfSunburstChart.Levels>
                 <chart:SunburstHierarchicalLevel GroupMemberPath="Category"/>
@@ -65,10 +65,11 @@
             <chart:SfSunburstChart.CenterView>
                     <StackLayout VerticalOptions="Center" HeightRequest="{Binding CenterHoleSize}" 
                                  WidthRequest="{Binding CenterHoleSize}">
-                    <Image Source="logo.png" HeightRequest="{OnPlatform Android=45,iOS=45,Default=55}" WidthRequest="{OnPlatform Android=30,iOS=30, Default=45}"/>
-                        <Label LineBreakMode="WordWrap" MaxLines="2" Text="Globe's wisdom core" TextColor="#5d5d5d" 
+                    <Image Source="logo.png" HeightRequest="{OnPlatform Android=45,iOS=45,Default=55}" 
+                           WidthRequest="{OnPlatform Android=30,iOS=30, Default=45}" Margin="{OnPlatform MacCatalyst='0,46,0,0'}"/>
+                    <Label LineBreakMode="WordWrap" MaxLines="2" Text="Globe's wisdom core" TextColor="#5d5d5d" 
                            FontFamily="AcmeRegular" FontSize="{OnPlatform Android=9.5,iOS=9, Default=14}"
-                           HorizontalTextAlignment="Center"/>
+                           HorizontalTextAlignment="Center" Margin="{OnPlatform MacCatalyst='0,6,0,0'}"/>
                     </StackLayout>
             </chart:SfSunburstChart.CenterView>
 
