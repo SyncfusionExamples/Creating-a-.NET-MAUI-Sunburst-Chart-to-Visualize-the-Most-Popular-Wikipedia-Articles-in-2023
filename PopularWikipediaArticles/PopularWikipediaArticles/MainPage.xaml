@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:chart="clr-namespace:Syncfusion.Maui.SunburstChart;assembly=Syncfusion.Maui.SunburstChart"
+             xmlns:model="clr-namespace:PopularWikipediaArticles"
+             x:Class="PopularWikipediaArticles.MainPage">
+
+    <ContentPage.BindingContext>
+        <model:WikipediaData />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <model:MillionsConverter x:Key="millionsConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Border Stroke="#092748" Padding="{OnPlatform Default=10, Android=7,iOS=7}" StrokeShape="RoundRectangle 10" Margin="25" StrokeThickness="2">
+
+        <chart:SfSunburstChart ItemsSource="{Binding Data}" ValueMemberPath="Value" PaletteBrushes="{Binding CustomBrush}" 
+                               EnableTooltip="True" ShowLabels="True" Radius="1" InnerRadius="{OnPlatform MacCatalyst=0.21, Default=0.37}">
+
+            <chart:SfSunburstChart.Levels>
+                <chart:SunburstHierarchicalLevel GroupMemberPath="Category"/>
+                <chart:SunburstHierarchicalLevel GroupMemberPath="Article"/>
+            </chart:SfSunburstChart.Levels>
+            
+            <chart:SfSunburstChart.Title>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Image Grid.Column="0" Grid.RowSpan="2" Source="wikipedia.png" Margin="0,-25,0,20" 
+             HeightRequest="100" WidthRequest="{OnPlatform Android=40,iOS=40, Default=50}"/>
+                    <StackLayout Grid.Column="1" Grid.Row="0" Margin="5,0,0,0">
+                        <Label Text="The Most Popular Wikipedia Articles in 2023" FontSize="{OnPlatform Android=20, iOS=20 ,Default=25}" FontAttributes="Bold" TextColor="#666666"/>
+                        <Label Text="Wikipedia English-language articles with the most visits in 2023(in millions)" FontSize="{OnPlatform Android=14,iOS=14, Default=17}" TextColor="Gray" Margin="0,2,0,0"/>
+                    </StackLayout>
+                </Grid>
+            </chart:SfSunburstChart.Title>
+
+            <chart:SfSunburstChart.Legend>
+                <chart:SunburstLegend Placement="Right"/>
+            </chart:SfSunburstChart.Legend>
+            
+            <chart:SfSunburstChart.TooltipTemplate>
+                <DataTemplate>
+                    <StackLayout Orientation="Horizontal">
+                        <Rectangle HeightRequest="30" WidthRequest="8" Fill="{Binding Fill}"/>
+                        <StackLayout>
+                            <Label Text="{Binding Item[0]}" FontSize="12.5" Margin="5,0,0,0" FontAttributes="Bold" TextColor="White"/>
+                            <Label Text="{Binding Item[1], Converter={StaticResource millionsConverter}}" FontSize="11.5" Margin="5,2,0,0" TextColor="White"/>
+                        </StackLayout>
+                    </StackLayout>
+                </DataTemplate>
+            </chart:SfSunburstChart.TooltipTemplate>
+
+            <chart:SfSunburstChart.CenterView>
+                    <StackLayout VerticalOptions="Center" HeightRequest="{Binding CenterHoleSize}" 
+                                 WidthRequest="{Binding CenterHoleSize}">
+                    <Image Source="logo.png" HeightRequest="{OnPlatform Android=45,iOS=45,Default=55}" 
+                           WidthRequest="{OnPlatform Android=30,iOS=30, Default=45}" Margin="{OnPlatform MacCatalyst='0,46,0,0'}"/>
+                    <Label LineBreakMode="WordWrap" MaxLines="2" Text="Globe's wisdom core" TextColor="#5d5d5d" 
+                           FontFamily="AcmeRegular" FontSize="{OnPlatform Android=9.5,iOS=9, Default=14}"
+                           HorizontalTextAlignment="Center" Margin="{OnPlatform MacCatalyst='0,6,0,0'}"/>
+                    </StackLayout>
+            </chart:SfSunburstChart.CenterView>
+
+        </chart:SfSunburstChart>
+    </Border>
+</ContentPage>
