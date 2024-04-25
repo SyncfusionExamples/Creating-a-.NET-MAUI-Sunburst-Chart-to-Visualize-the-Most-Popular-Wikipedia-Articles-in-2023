@@ -16,4 +16,4 @@ This article demonstrates how to create the .NET MAUI Sunburst Chart to display 
 ### Path too long exception 
 If you are facing a path too long exception when building this example project, close Visual Studio and rename the repository to a shorter name and build the project. 
 
-For a step-by-step procedure, refer to the [Most Popular Wikipedia Article 2023 blog]().
+For a step-by-step procedure, refer to the [Most Popular Wikipedia Article 2023 blog](https://www.syncfusion.com/blogs/post/dotnet-maui-sunburst-chart-wikipedia).
